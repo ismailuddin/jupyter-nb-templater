@@ -35,7 +35,7 @@ datetime_now = now.strftime("%Y-%m-%d %H:%M %Z")
 output_header="""\
 # `nb_templater` generated Python script
 # Generated from .ipynb template: {}
-# www.github.com/ismailuddin/nb-templater/
+# www.github.com/ismailuddin/jupyter-nb-templater/
 # Generated on: {}
 
 import nbformat as nbf 
