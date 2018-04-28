@@ -1,4 +1,6 @@
 # nb-templater
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+
 ![Tool preview](preview.gif)
 
 A tool to generate a Python script to programmatically generate Jupyter notebooks, using a Jupyter notebook as a template starting point.
