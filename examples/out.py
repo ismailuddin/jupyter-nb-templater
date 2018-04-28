@@ -1,6 +1,6 @@
 # `nb_templater` generated Python script
 # Generated from .ipynb template: test.ipynb
-# www.github.com/ismailuddin/nb-templater/
+# www.github.com/ismailuddin/jupyter-nb-templater/
 # Generated on: 2018-04-28 15:00 
 
 import nbformat as nbf 
