@@ -1,5 +1,5 @@
 # nb-templater
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ismailuddin/jupyter-nb-templater/issues)
 
 ![Tool preview](preview.gif)
 
