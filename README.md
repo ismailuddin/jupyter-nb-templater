@@ -14,11 +14,26 @@ The intention of this script is to speed up the process of programmatically gene
 * Python 3.X 
 * nbformat
 
+
+## Installation
+First clone the repo
+
+```bash
+$  git clone https://github.com/ismailuddin/jupyter-nb-templater.git
+```
+
+Then install using
+
+```bash
+$  python setup.py install
+```
+
+
 ## Usage
 To generate a Python script to programmatically generate a Jupyter notebook, first run `nb-templater` on the template Jupyter notebook file:
 
 ```shell
-$	nb-templater -f input.ipynb -o output_script.py [ -n output.ipynb ]
+$  nb-templater -f input.ipynb -o output_script.py [ -n output.ipynb ]
 ```
 
 ### Arguments
@@ -33,7 +48,7 @@ Once the script has been generated, you can edit this file to customise the cell
 The generated Jupyter notebooks will not have been 'executed' by default. Using a shell script, you can execute this scripts from the command line with the following command:
 
 ```shell
-$   jupyter nbconvert --execute --inplace "input.ipynb"
+$  jupyter nbconvert --execute --inplace "input.ipynb"
 ```
 
 Covered in a bit more detail in my blog [post](https:/ismailuddin.github.io/python/general/2018/09/30/Jupyter-nbtemplater.html).
