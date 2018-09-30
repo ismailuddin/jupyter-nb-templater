@@ -1,4 +1,4 @@
-![](/Users/iuddin/Documents/GitHub/jupyter-nbtemplate/nb-templater-header.png)
+![](nb-templater-header.png)
 
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ismailuddin/jupyter-nb-templater/issues)
 
