@@ -35,7 +35,16 @@ output_str = ""
 for cell in ipynb['cells']:
     cell_type = cell['cell_type']
     source = cell['source']
-    nb_cells.append([cell_type, source])
+    old_metadata = cell['metadata']
+    metadata = {}
+    # it is not necessary to add all metadata
+    # metadata keys can be added here if needed
+    # add tags
+    if 'tags' in old_metadata:
+        tags = old_metadata['tags']
+        if tags:
+            metadata['tags'] = tags
+    nb_cells.append([cell_type, source, metadata])
 
 now = datetime.datetime.now()
 datetime_now = now.strftime("%Y-%m-%d %H:%M %Z")
@@ -86,7 +95,10 @@ for i, cell in enumerate(nb_cells):
         _cell = mdown_cell_str.format("cell_{}".format(i))
         _list_of_cells.append(_cell)
     elif cell[0] == 'code':
-        _cell = code_cell_str.format("cell_{}".format(i))
+        if cell[2]:
+            _cell = code_cell_str.format("source=cell_{},metadata={}".format(i,cell[2]))
+        else:
+            _cell = code_cell_str.format("cell_{}".format(i))
         _list_of_cells.append(_cell)
 
 list_of_cells = ',\n'.join(_list_of_cells)
@@ -94,6 +106,23 @@ list_of_cells = ',\n'.join(_list_of_cells)
 nb_cells_generator = nb_cells_generator_str.format(list_of_cells)
 
 output_str += nb_cells_generator
+
+# add metadata as if it was created with jupyter notebook
+# missing metadata may cause error when working with some CLI processes
+nb_metadata_generator_str = """
+nb['metadata'] = {}
+"""
+old_nb_metadata = ipynb['metadata']
+nb_metadata = {}
+# add kernelspec if any
+if 'kernelspec' in old_nb_metadata:
+    kernelspec = old_nb_metadata['kernelspec']
+    if kernelspec:
+        nb_metadata['kernelspec'] = kernelspec
+
+if nb_metadata:
+    nb_metadata_generator = nb_metadata_generator_str.format(nb_metadata)
+    output_str += nb_metadata_generator
 
 if args.nboutput:
     nb_output_name = args.nboutput 
