@@ -4,6 +4,7 @@ import json
 import argparse
 import datetime
 import sys
+import os
 
 desc = """\
 A tool to generate a Python script that can generate a Jupyter
@@ -24,7 +25,7 @@ if len(sys.argv) == 1:
 filename = args.filename
 
 # Read in Jupyter notebook template file
-with open(filename, 'r') as file:
+with open(file=filename, mode='r', encoding='utf-8') as file:
     ipynb = json.load(file)
 
 nb_cells = []
@@ -40,6 +41,7 @@ now = datetime.datetime.now()
 datetime_now = now.strftime("%Y-%m-%d %H:%M %Z")
 
 output_header="""\
+# -*- coding: utf-8 -*-
 # `nb_templater` generated Python script
 # Generated from .ipynb template: {}
 # www.github.com/ismailuddin/jupyter-nb-templater/
@@ -50,9 +52,9 @@ import sys
 nb = nbf.v4.new_notebook() \n\n""".format(args.filename, datetime_now)
 
 cell_template_string = """\
-cell_{0}=\"\"\"\\
+cell_{0}=r\"\"\"
 {1}
-\"\"\"\n
+\"\"\".strip()\n
 """
 
 output_str += output_header
@@ -96,17 +98,20 @@ output_str += nb_cells_generator
 if args.nboutput:
     nb_output_name = args.nboutput 
 else:
-    nb_output_name = "_" + args.filename
+    nb_output_name = os.path.realpath(args.filename)
+    nb_output_base_name = "_" + os.path.basename(nb_output_name)
+    nb_output_dir = os.path.dirname(nb_output_name)
+    nb_output_name = os.path.join(nb_output_dir,nb_output_base_name)
 
 write_nb = """\n
-nbf.write(nb, '{0}')
-print("Jupyter notebook {0} successfully generated.")
+nbf.write(nb, r'{0}')
+print(r"Jupyter notebook {0} successfully generated.")
 """.format(nb_output_name)
 
 output_str += write_nb
 
 # Output Python script file
-with open(args.output, 'w') as output:
+with open(file=args.output, mode='w', encoding='utf-8') as output:
     output.write(output_str)
 
 print("Python script {} generated sucessfully.".format(args.output))
